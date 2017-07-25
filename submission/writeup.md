@@ -138,15 +138,19 @@ The course towards the final model is iterative and empirical, different combina
 It's time to have some fun with the final model. Five new images are acquired from the internet and will be put to test the final model. Preprocessing of cropping & resizing of the raw images are performed before feeding into the model. Following will be an image-by-image walkthrough of rationale of image choice, thier qualities, predicted class and thier softmax output.
 
 > **Test Image 0: Keep right** ![](writeup_plot/new_image_prediction_0.png) 
+
 First, let's choose a sign that has a high number of instances in the data. The reason is that we expect this class to perform well. In the chosen *Keep Right* sign above, the arrow pointing to bottom right is slightly rotated as compared to the real *keep right* sign. But, the classifier is able to classify with a high probability of *keep right* class. However, an interesting test should be carried out because the chosen image can be [*turn right* sign](https://en.wikipedia.org/wiki/Road_signs_in_Germany) which is not part of the dataset here.
 
 > **Test Image 1: Speed limit (20km/h)** ![](writeup_plot/new_image_prediction_1.png) 
+
 With reference to the exploratory barplot earlier, this sign is selected because its low count in the dataset. Examing the image, the sign is captured from angle as it looks tilted and the text of *20* is also blocked partially. Despite the variability and low instances, the classifier predicts the image correctly with over 95% of probability.
 
 > **Test Image 2: Mandatory direction of travel** ![](writeup_plot/new_image_prediction_2.png) 
+
 The model response of external class is the subject of this test. The image is clear and obvious, it is a sign of [*Mandatory direction of travel*](http://www.gettingaroundgermany.info/zeichen.shtml), there is none of this class in the training dataset. The model predicts it to be a sign of *Go straight or left*, which is decent, visually it is the closest match where the left arrow resembles each other. However, a question arises here, why prediction of '*Go straight or* **right**' is not high enough to show as top 5 classes as the right arrow would looks like the one in test image?
 
 > **Test Image 3: Cattle** ![](writeup_plot/new_image_prediction_3.png) 
+
 It will be interesting to try an outrageous angle and external sign, the [*cattle*](https://en.wikipedia.org/wiki/Road_signs_in_Germany) sign is chosen. As the cattle sign is an external class, the warning triangle has been the determining feature and it has resulted in *road work* sign predicted but at a relatively low probability. The second probable predicted sign is *Dangerous curve to the right*. To understand better, we will go through these feature map plot in the following section.   
 
 > **Test Image 4: No equestrians** ![](writeup_plot/new_image_prediction_4.png) 
