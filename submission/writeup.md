@@ -81,8 +81,8 @@ As Lenet-5 architecture is self-explanatory, the emphasis is given to the design
 3. **Multi-scale features**
  - This is to enable attempt on the central idea of [Sermanet et al.](http://yann.lecun.com/exdb/publis/pdf/sermanet-ijcnn-11.pdf) paper, where the output of multiple convolution stages are branched out and fed as input to the classifier, it is proven beneficial in the paper. This is disabled by default. Enabling this bool flag means both stages of convolution output are being fed to the classifier. 
 
- 4. **Dropout** 
-  - This is a regularization technique for reducing overfitting. The technique temporarily and randomly drops hidden units from the network. We only allow dropout at the input layer of the classifier. This bool flag can be enabled or disabled by default.
+4. **Dropout** 
+ - This is a regularization technique for reducing overfitting. The technique temporarily and randomly drops hidden units from the network. We only allow dropout at the input layer of the classifier. This bool flag can be enabled or disabled by default.
 
 
 ### Model Training
@@ -105,19 +105,17 @@ The course towards the final model is iterative and empirical, different combina
 | 3        | Grayscale Images with Augmentation | 12                    | 32                    | **Yes**                  | None    | 94.8                    | *94.1*              |
 | 4        | Grayscale Images with Augmentation | 12                    | 32                    | Yes                  | **0.90**    | 95.2                    | *94.3*              |
 
-> 1. It is all started with LeNet-5 architecture learned in the course lab. With the initial EPOCH of 10 and learning rate of 0.001, the test accuracy is about 89%. For comparison, some hyperparameters needs to be fixed, learning rate stays 0.001, batch size remains 128, EPOCH is modified to 50 because all the models above are observed to be considered converged at 50. For example, the basic LeNet-5 (model 0) is giving test accuracy of 91-92% at EPOCH 50 and 100.
 
+> 1. It is all started with LeNet-5 architecture learned in the course lab. With the initial EPOCH of 10 and learning rate of 0.001, the test accuracy is about 89%. For comparison, some hyperparameters needs to be fixed, learning rate stays 0.001, batch size remains 128, EPOCH is modified to 50 because all the models above are observed to be considered converged at 50. For example, the basic LeNet-5 (model 0) is giving test accuracy of 91-92% at EPOCH 50 and 100.
 
 > 2. Next, the depth of 2 stages convolution is doubled. The idea to see if increase in depth of these hidden layers could improves the test accuracy. Yes, it does, slightly.
 
-
 > 3. Can more data improve the model robustness? Yes, with augmented data of 4x of initial size, the model is now at 93.2% of test accuracy, hitting the minimum required for the project. There is a caveat observed during the sketches, if the augmenting data is too noisy or high in variance, the model of same architecture may not improve and potentially degrade. For instance, the mirror effect by flipping horizontal or vertically actually causes the model being poorly in the same configuration of hyper-parameters and parameters space here.
-
 
 > 4. To reproduce the proven improvement in Sermanet et al paper, the multi-scaled feature is introduced by feeding both convolution output to classifier. With that, test accuracy is further improved by 0.9%, i.e. from 93.2 to 94.1. The reasoning is that the classifier has learned the features at different abstraction level, not only the last stage of convolution filter. We can examine later on in the feature map plot.
 
-
 > 5. The final model includes a dropout at the input of the classifier to prevent overfitting and for generalization. Probability rate of dropping out has been tested, the best result obtained for 50 epochs is with 0.90. **The final test accuracy is 94.3%**. Following is the complete model architecture and it took about 7 mins to train with AWS EC2 g2.2xlarge instance.
+
 
 #### The Final Model
 | Layer                                        | Description                                                                  |
